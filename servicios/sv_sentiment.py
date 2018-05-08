@@ -63,7 +63,7 @@ def get_information():
     # db = client[DB_NAME]
     # db.authenticate(DB_USER, DB_PASS)
     # print(db.collections)
- 
+    
     for tweet in search:
         r = requests.post("http://text-processing.com/api/sentiment/", data = {'text' : tweet.text})
         response = json.loads(r.text)
