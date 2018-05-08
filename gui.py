@@ -42,6 +42,11 @@ def sentiment_analysis():
     title = request.args.get("t")
     if len(title) is not 0:
         # La siguiente url es para un servicio local
+        url_sentiment = urllib.urlopen("http://127.0.0.1:8085/api/v1/information?t=" + title)
+        json_sentiment = url_sentiment.read()
+
+        sentiments = json.loads(json_sentiment)
+
         url_omdb = urllib.urlopen("http://127.0.0.1:8084/api/v1/information?t=" + title)
         # La siguiente url es para un servicio en la nube, pregunta al instructor(a) si el servicio está activo
         # url_omdb = urllib.urlopen("https://uaz.cloud.tyk.io/content/api/v1/information?t=" + title)
@@ -49,6 +54,11 @@ def sentiment_analysis():
         json_omdb = url_omdb.read()
         # Se convierte en un JSON la respuesta leída
         omdb = json.loads(json_omdb)
+
+        omdb["neg"] = sentiments["neg"]
+        omdb["pos"] = sentiments["pos"]
+        omdb["neutral"] = sentiments["neutral"]
+        
         # Se llena el JSON que se enviará a la interfaz gráfica para mostrársela al usuario
         json_result = {'omdb': omdb}
         # Se regresa el template de la interfaz gráfica predefinido así como los datos que deberá cargar
