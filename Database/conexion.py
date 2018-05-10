@@ -27,6 +27,7 @@
 #
 import sqlite3
 from os.path import isfile, getsize
+import time
 
 def isSqliteExist():
     if isfile("DBArch"):
@@ -35,16 +36,25 @@ def isSqliteExist():
         db = sqlite3.connect('DBArch')
         cursor = db.cursor()
         cursor.execute('''
-        CREATE TABLE Twitter(id INTEGER PRIMARY KEY AUTOINCREMENT, stringSearched TEXT,  tweet TEXT, feeling TEXT)''')
+        CREATE TABLE Twitter(id INTEGER PRIMARY KEY, name TEXT,  date TEXT, feeling TEXT)''')
         db.commit()
 
 
-def storeTweet(Tweet, Feeling):
+def storeorUpdateTweet(Id,Tweet, Feeling):
     db = sqlite3.connect('DBArch')
     cursor = db.cursor()
+    id = Id
     tweet = Tweet
     feeling = Feeling
-    cursor.execute('''INSERT INTO Twitter(tweet, feeling) VALUES(?,?)''', (tweet,feeling))
+    cursor.execute('''SELECT * FROM Twitter''')
+    user1 = cursor.fetchone() #retrieve the first row
+    print(user1[0]) #Print the first column retrieved(user's name)
+    all_rows = cursor.fetchall()
+    for row in all_rows:
+        # row[0] returns the first column in the query (name), row[1] returns email column.
+        print('{0} : {1}, {2}'.format(row[0], row[1], row[2]))
+    
+    cursor.execute('''INSERT INTO Twitter(id, tweet, feeling, date) VALUES(?,?,?,?)''', (id,tweet,feeling,time.strftime("%H:%M:%S")))
 
 
 def deleteTweets():
