@@ -40,17 +40,15 @@ def isSqliteExist():
         db.close()
 
 
-def storeTweet(Id,Tweet, Feeling):
+def storeTweet(Id,Tweet):
     db = sqlite3.connect('DBArch')
     cursor = db.cursor()
-    id = Id
     tweet = Tweet
-    feeling = Feeling
-    cursor.execute('''SELECT * FROM Twitter WHERE id=?''', (id))
+    cursor.execute('''SELECT * FROM Twitter WHERE id=?''', (Id,))
     db.commit()
     all_rows = cursor.fetchall()
-    if all_rows.count() == 0
-        cursor.execute('''INSERT INTO Twitter(id, tweet, feeling, date) VALUES(?,?,?,?)''', (id,tweet,feeling,time.strftime("%H:%M:%S")))
+    if len(all_rows) == 0:
+        cursor.execute('''INSERT INTO Twitter(Id, name, date) VALUES(?,?,?)''', (Id,tweet,time.strftime("%H:%M:%S")))
         db.commit()
         db.close()
     
@@ -76,3 +74,11 @@ def deleteTweets():
     cursor.execute('''DROP TABLE Twitter''')
     db.commit()    
     db.close() 
+
+def selectTweets():
+    db = sqlite3.connect('DBArch')
+    cursor = db.cursor()
+    cursor.execute('''SELECT * FROM Twitter ''')
+    all_rows = cursor.fetchall()
+    db.close()
+    return all_rows
