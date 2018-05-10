@@ -34,11 +34,14 @@ import requests
 import json
 import pymongo
 from pymongo import MongoClient
+import sys
+sys.path.insert(0, '../Database')
+import conexion
 
 app = Flask(__name__)
 
 
-@app.route("/api/v1/information")
+@app.route("/api/v1/tweets")
 def get_information():
     """
     Este método obtiene información acerca de una película o serie
@@ -51,12 +54,21 @@ def get_information():
                       consumer_secret='JYS7Cz1j5tfkZw7L44JcXzzgzt3cAkKn5LNl1jBIf4JnCCA03S',
                       access_token_key='174333272-muKrJ9mlEfRwUwzoK5BKz1IrwwrqyIrnVj8LqZbO',
                       access_token_secret='wPvxXEuBkI7KVJyLdJMvh0woD87gaElNuwDde7qlOslFo')
+    conexion.isSqliteExist()
     search = api.GetSearch(title, count=50)
+    tweets = []
+    for tweet in search:
+        tweets.append(tweet.text)
+        
+    print json.dumps({"tweets":tweets})
+    
     sentiments = {}
+
     
     for tweet in search:
         r = requests.post("http://text-processing.com/api/sentiment/", data = {'text' : tweet.text})
         response = json.loads(r.text)
+        conexion.storeTweet(tweet.text, response["label"])
         if not response["label"] in sentiments:
             sentiments[response["label"]] = 1
         else:
