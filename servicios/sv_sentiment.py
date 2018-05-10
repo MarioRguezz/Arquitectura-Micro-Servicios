@@ -54,16 +54,6 @@ def get_information():
     search = api.GetSearch(title, count=50)
     sentiments = {}
     
-    # DB_NAME = "arquitectura"
-    # DB_HOST = "ds115340.mlab.com"
-    # DB_PORT = 46867
-    # DB_USER = "Pruebas_Sistemas"
-    # DB_PASS = "123asdZXC"
-    # client = MongoClient(DB_HOST,DB_PORT)
-    # db = client[DB_NAME]
-    # db.authenticate(DB_USER, DB_PASS)
-    # print(db.collections)
-    
     for tweet in search:
         r = requests.post("http://text-processing.com/api/sentiment/", data = {'text' : tweet.text})
         response = json.loads(r.text)
