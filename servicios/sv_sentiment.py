@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 # !/usr/bin/env python
 # ----------------------------------------------------------------------------------------------------------------
-# Archivo: sv_information.py
+# Archivo: sv_sentiment.py
 # Tarea: 2 Arquitecturas Micro Servicios.
-# Autor(es): Perla Velasco & Yonathan Mtz.
-# Version: 1.3 Octubre 2017
+# Autor(es): Equipo Alfeluma
+# Version: 1.1 Mayo 2018
 # Descripción:
 #
 #   Este archivo define el rol de un servicio. Su función general es porporcionar en un objeto JSON
