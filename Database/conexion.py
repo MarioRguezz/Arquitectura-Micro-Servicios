@@ -35,32 +35,36 @@ def isSqliteExist():
     else:
         db = sqlite3.connect('DBArch')
         cursor = db.cursor()
-        cursor.execute('''
-        CREATE TABLE Twitter(id INTEGER PRIMARY KEY, name TEXT,  date TEXT, feeling TEXT)''')
+        cursor.execute('''CREATE TABLE Twitter(id INTEGER PRIMARY KEY, name TEXT,  date TEXT, feeling TEXT)''')
         db.commit()
+        db.close()
 
 
-def storeorUpdateTweet(Id,Tweet, Feeling):
+def storeTweet(Id,Tweet, Feeling):
     db = sqlite3.connect('DBArch')
     cursor = db.cursor()
     id = Id
     tweet = Tweet
     feeling = Feeling
-    cursor.execute('''SELECT * FROM Twitter''')
-    user1 = cursor.fetchone() #retrieve the first row
-    print(user1[0]) #Print the first column retrieved(user's name)
+    cursor.execute('''SELECT * FROM Twitter WHERE id=?''', (id))
+    db.commit()
     all_rows = cursor.fetchall()
-    for row in all_rows:
-        # row[0] returns the first column in the query (name), row[1] returns email column.
-        print('{0} : {1}, {2}'.format(row[0], row[1], row[2]))
+    if all_rows.count() == 0
+        cursor.execute('''INSERT INTO Twitter(id, tweet, feeling, date) VALUES(?,?,?,?)''', (id,tweet,feeling,time.strftime("%H:%M:%S")))
+        db.commit()
+        db.close()
     
-    cursor.execute('''INSERT INTO Twitter(id, tweet, feeling, date) VALUES(?,?,?,?)''', (id,tweet,feeling,time.strftime("%H:%M:%S")))
+def updateTweet(Id,Feeling):
+    db = sqlite3.connect('DBArch')
+    cursor = db.cursor()
+    cursor.execute('''UPDATE Twitter SET feeling = ? WHERE id = ? ''', (Id, Feeling))
+    db.commit()
+    db.close()
 
 
 def deleteTweets():
     db = sqlite3.connect('DBArch')
     cursor = db.cursor()
-    tweet = Tweet
-    feeling = Feeling
-    cursor.execute('''INSERT INTO Twitter(tweet, feeling) VALUES(?,?)''', (tweet,feeling))
-
+    cursor.execute('''DROP TABLE Twitter''')
+    db.commit()    
+    db.close() 

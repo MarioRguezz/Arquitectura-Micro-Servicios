@@ -3,7 +3,7 @@
 # ----------------------------------------------------------------------------------------------------------------
 # Archivo: sv_information.py
 # Tarea: 2 Arquitecturas Micro Servicios.
-# Autor(es): Perla Velasco & Yonathan Mtz.
+# Autor(es): Equipo ALFELUMA
 # Version: 1.3 Octubre 2017
 # Descripción:
 #
