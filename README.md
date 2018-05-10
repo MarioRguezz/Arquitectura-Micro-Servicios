@@ -29,3 +29,6 @@ Una vez instalados los prerrequisitos es momento de ejcutar el sistema siguiendo
 4. Abrir el navegador
 5. Acceder a la url del sistema:
    > http://localhost:8000/ - página de inicio!
+
+
+![Diagrama de contenedores del SMAM](imagenes/diagrama.png)
