@@ -42,7 +42,7 @@ def sentiment_analysis():
     title = request.args.get("t")
     if len(title) is not 0:
         # La siguiente url es para un servicio local
-        url_sentiment = urllib.urlopen("http://127.0.0.1:8085/api/v1/information?t=" + title)
+        url_sentiment = urllib.urlopen("http://127.0.0.1:8085/api/v1/tweets?t=" + title)
         json_sentiment = url_sentiment.read()
 
         sentiments = json.loads(json_sentiment)

@@ -38,7 +38,7 @@ from pymongo import MongoClient
 app = Flask(__name__)
 
 
-@app.route("/api/v1/information")
+@app.route("/api/v1/tweets")
 def get_information():
     """
     Este método obtiene información acerca de una película o serie
@@ -52,7 +52,13 @@ def get_information():
                       access_token_key='174333272-muKrJ9mlEfRwUwzoK5BKz1IrwwrqyIrnVj8LqZbO',
                       access_token_secret='wPvxXEuBkI7KVJyLdJMvh0woD87gaElNuwDde7qlOslFo')
     search = api.GetSearch(title, count=50)
+    tweets = []
+    for tweet in search:
+        tweets.append(tweet.text)
+    print json.dumps({"tweets":tweets})
+    
     sentiments = {}
+
     
     # DB_NAME = "arquitectura"
     # DB_HOST = "ds115340.mlab.com"
