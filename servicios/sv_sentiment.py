@@ -42,7 +42,7 @@ app = Flask(__name__)
 
 
 @app.route("/api/v1/tweets")
-def get_information():
+def tweets():
     """
     Este método obtiene información acerca de una película o serie
     específica.
@@ -59,8 +59,11 @@ def get_information():
     tweets = []
     for tweet in search:
         tweets.append(tweet.text)
-        
+        conexion.storeTweet(tweet.id,tweet.text)
     print json.dumps({"tweets":tweets})
+    
+    for tweet in conexion.selectTweets():
+        print tweet
     
     sentiments = {}
 
@@ -68,7 +71,6 @@ def get_information():
     for tweet in search:
         r = requests.post("http://text-processing.com/api/sentiment/", data = {'text' : tweet.text})
         response = json.loads(r.text)
-        conexion.storeorUpdateTweet(tweet.id,tweet.text, response["label"])
         if not response["label"] in sentiments:
             sentiments[response["label"]] = 1
         else:
