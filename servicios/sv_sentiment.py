@@ -68,7 +68,7 @@ def get_information():
     for tweet in search:
         r = requests.post("http://text-processing.com/api/sentiment/", data = {'text' : tweet.text})
         response = json.loads(r.text)
-        conexion.storeTweet(tweet.text, response["label"])
+        conexion.storeorUpdateTweet(tweet.id,tweet.text, response["label"])
         if not response["label"] in sentiments:
             sentiments[response["label"]] = 1
         else:
