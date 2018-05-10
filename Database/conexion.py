@@ -62,6 +62,14 @@ def updateTweet(Id,Feeling):
     db.close()
 
 
+def selectTweets():
+    db = sqlite3.connect('DBArch')
+    cursor = db.cursor()
+    cursor.execute('''SELECT * FROM Twitter ''')
+    db.commit()
+    db.close()
+
+
 def deleteTweets():
     db = sqlite3.connect('DBArch')
     cursor = db.cursor()
