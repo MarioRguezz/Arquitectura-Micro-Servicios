@@ -31,4 +31,4 @@ Una vez instalados los prerrequisitos es momento de ejcutar el sistema siguiendo
    > http://localhost:8000/ - página de inicio!
 
 
-![Diagrama de contenedores del SMAM](imagenes/diagrama.png)
+![Diagrama de contenedor del sistema de análisis de sentimientos](imagenes/diagrama.png)

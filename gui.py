@@ -66,6 +66,10 @@ def sentiment_analysis():
     else:
         return render_template("error-500.html")
 
+@app.route("/historial", methods=['GET'])
+def historial():
+        return render_template("historial.html")
+
 
 if __name__ == '__main__':
     # Se define el puerto del sistema operativo que utilizará el Sistema de Procesamiento de Comentarios (SPC).
