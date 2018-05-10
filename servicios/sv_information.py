@@ -3,8 +3,8 @@
 # ----------------------------------------------------------------------------------------------------------------
 # Archivo: sv_information.py
 # Tarea: 2 Arquitecturas Micro Servicios.
-# Autor(es): Equipo ALFELUMA
-# Version: 1.3 Octubre 2017
+# Autor(es): Equipo Alfeluma
+# Version: 1.1 Mayo 2018
 # Descripción:
 #
 #   Este archivo define el rol de un servicio. Su función general es porporcionar en un objeto JSON
