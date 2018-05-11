@@ -1,15 +1,11 @@
-FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
-
 # Servicios
-En esta carpeta se define el servicio utilizado en la tarea 2
-dentro del Sistema de Procesamiento de Comentarios (SPC).
-La especificación del servicio del Procesador de Comentarios de IMDb,
-servicio de procesador de sentimientos y el servicio de procesador
-de tweets se realizó utilizando blueprint de Apiary.
+En esta carpeta se define el servicio utilizado en la tarea 2 dentro del Sistema de Procesamiento de Comentarios (SPC). La especificación del servicio del Procesador de Comentarios de IMDb se realizó utilizando blueprint de Apiary.
 La especificación es la siguiente:
 
 ## Procesador de Comentarios de IMDb
+
+FORMAT: 1A
+HOST: https://uaz.cloud.tyk.io/content
 
 ## Information Service [/api/v1/information{?t}]
 
@@ -57,10 +53,10 @@ Ejemplo de uso:
 
 
 
-## Procesador Sentimientos
+## Sentiment Analysis
 
 FORMAT: 1A
-HOST: http://localhost:8085
+HOST: http://localhost:8086
 
 ## Sentiment Analysis [/api/v1/SentimentAnalysis{?t}]
 
@@ -69,10 +65,10 @@ HOST: http://localhost:8085
 
 ### Sentiment Analysis [GET]
 
++ Response 200 (application/json)
+
 {
-"neg" : "Some text",
-"pos" : "Some text",
-"neutral" : "Some text"
+"Some text"
 }
 
 + Response 400 (text)
@@ -84,29 +80,57 @@ HOST: http://localhost:8085
 
 Ejemplo de uso:
 1. Abrir el navegador
-1. Ingresar a http://localhost:8085/api/v1/SentimentAnalysis/get
+1. Ingresar a http://localhost:8086/api/v1/SentimentAnalysis/get
 
 
 
 
-## Procesador Twitter
+## percentage [/api/v1/SentimentAnalysis/get]
+
+### Get percentage [GET]
+
++ Response 200 (application/json)
+
+{
+"positive": "Some text",
+"neutral": "Some text",
+"negative": "Some text"
+}
+
++ Response 400 (text)
+
+{
+"title": "Bad Request"
+"message": "The browser (or proxy) sent a request that this server could not understand."
+}
+
+Ejemplo de uso:
+1. Abrir el navegador
+1. Ingresar a http://localhost:8086/api/v1/SentimentAnalysis/get
+
+
+
+
+
+
+
+
+## Get twitter comment
 
 FORMAT: 1A
-HOST: http://localhost:8086
+HOST: http://localhost:8085/
 
-## Twitter comentario [/api/v1/SentimentAnalysis/get]
-
+## twitter comment [/api/v1/tweets/set{?t}]
 
 + Parameters
-+ t - Corresponde a la cadena de texto para buscar tweets relacionados
++ t - Corresponde al título de la película o serie de Netflix.
 
 ### Get twitter comment [GET]
 
 + Response 200 (application/json)
 
 {
-"id" : "Some text",
-"tweets" : "Some text",
+""
 }
 
 + Response 400 (text)
@@ -118,59 +142,4 @@ HOST: http://localhost:8086
 
 Ejemplo de uso:
 1. Abrir el navegador
-1. Ingresar a http://localhost:8086/api/v1/tweets/set?t=Stranger+Things
-
-
-
-## Twitter historial [/api/v1/SentimentAnalysis/get]
-
-
-### Get twitter comment [GET]
-
-+ Response 200 (application/json)
-
-{
-"id" : "Some text",
-"tweets" : "Some text",
-"date" : "Some text",
-"feeling" : "Some text"
-}
-
-+ Response 400 (text)
-
-{
-"title": "Bad Request"
-"message": "The browser (or proxy) sent a request that this server could not understand."
-}
-
-Ejemplo de uso:
-1. Abrir el navegador
-1. Ingresar a http://localhost:8086/api/v1/tweets/set?t=Stranger+Things
-
-
-
-
-
-
-## Borrar tweets [/api/v1/SentimentAnalysis/get]
-
-
-### Delete tweets saved [POST]
-
-+ Response 200 (application/json)
-
-{
-"data" : true
-}
-
-+ Response 400 (text)
-
-{
-"title": "Bad Request"
-"message": "The browser (or proxy) sent a request that this server could not understand."
-}
-
-Ejemplo de uso:
-1. Abrir el navegador
-1. Ingresar a http://localhost:8086/api/v1/tweets/set?t=Stranger+Things
-
+1. Ingresar a http://localhost:8085/api/v1/tweets/set?t=Stranger+Things
