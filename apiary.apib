@@ -2,79 +2,148 @@ FORMAT: 1A
 HOST: http://polls.apiblueprint.org/
 
 # Servicios
+En esta carpeta se define el servicio utilizado en la tarea 2
+dentro del Sistema de Procesamiento de Comentarios (SPC).
+La especificación del servicio del Procesador de Comentarios de IMDb,
+servicio de procesador de sentimientos y el servicio de procesador
+de tweets se realizó utilizando blueprint de Apiary.
+La especificación es la siguiente:
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+## Procesador de Comentarios de IMDb
+  
+## Information Service [/api/v1/information{?t}]
 
-## Questions Collection [/questions]
++ Parameters
+    + t - Corresponde al título de la película o serie de Netflix.
 
-### List All Questions [GET]
+### Get Information [GET]
 
 + Response 200 (application/json)
 
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
-
-### Create a New Question [POST]
-
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
-
-+ Request (application/json)
-
-        {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
+        { 
+            "Title": "Some text",
+            "Year": "Some text", 
+            "Rated": "Some text",
+            "Released": "Some text",
+            "Runtime": "Some text",
+            "Genre": "Some text",
+            "Director": "Some text",
+            "Writer": "Some text",
+            "Actors": "Some text",
+            "Plot": "Some text",
+            "Language": "Some text",
+            "Country": "Some text",
+            "Awards": "Some text.",
+            "Poster": "Some text",
+            "Metascore": "Some text",
+            "imdbRating": "Some text",
+            "imdbVotes": "Some text",
+            "imdbID": "Some text",
+            "Type": "Some text",
+            "totalSeasons": "Some text",
+            "Response": "Some text"
         }
 
-+ Response 201 (application/json)
++ Response 400 (text)
 
-    + Headers
+        {
+            "title": "Bad Request"
+            "message": "The browser (or proxy) sent a request that this server could not understand."
+        }
 
-            Location: /questions/2
+Ejemplo de uso: 
+1. Abrir el navegador
+1. Ingresar a https://uaz.cloud.tyk.io/content/api/v1/information?t=Stranger+Things
 
-    + Body
 
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
-            }
+
+## Sentiment Analysis
+  
+FORMAT: 1A  
+HOST: http://localhost:8085
+
+## Sentiment Analysis [/api/v1/SentimentAnalysis{?t}]
+
++ Parameters
+    + t - Corresponde al comentario a procesar
+
+### Sentiment Analysis [GET]
+
++ Response 200 (application/json)
+
+        { 
+            "Some text"
+        }
+
++ Response 400 (text)
+
+        {
+            "title": "Bad Request"
+            "message": "The browser (or proxy) sent a request that this server could not understand."
+        }
+
+Ejemplo de uso: 
+1. Abrir el navegador
+1. Ingresar a http://localhost:8086/api/v1/SentimentAnalysis/get
+
+
+
+
+## percentage [/api/v1/SentimentAnalysis/get]
+
+### Get percentage [GET]
+
++ Response 200 (application/json)
+
+        { 
+            "positive": "Some text",
+            "neutral": "Some text", 
+            "negative": "Some text" 
+        }
+
++ Response 400 (text)
+
+        {
+            "title": "Bad Request"
+            "message": "The browser (or proxy) sent a request that this server could not understand."
+        }
+
+Ejemplo de uso: 
+1. Abrir el navegador
+1. Ingresar a http://localhost:8086/api/v1/SentimentAnalysis/get
+
+
+
+
+
+
+
+
+## Get twitter comment
+  
+FORMAT: 1A  
+HOST: http://localhost:8085/
+
+## twitter comment [/api/v1/tweets/set{?t}]
+
++ Parameters
+    + t - Corresponde al título de la película o serie de Netflix.
+
+### Get twitter comment [GET]
+
++ Response 200 (application/json)
+
+        { 
+            ""
+        }
+
++ Response 400 (text)
+
+        {
+            "title": "Bad Request"
+            "message": "The browser (or proxy) sent a request that this server could not understand."
+        }
+
+Ejemplo de uso: 
+1. Abrir el navegador
+1. Ingresar a http://localhost:8085/api/v1/tweets/set?t=Stranger+Things
