@@ -31,6 +31,7 @@ import time
 
 def isSqliteExist():
     if isfile("DBArch"):
+        print "Done"
         return True
     else:
         db = sqlite3.connect('DBArch')

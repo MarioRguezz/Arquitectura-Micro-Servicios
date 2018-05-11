@@ -52,7 +52,7 @@ def sentiment_analysis():
         for tweet in tweets["tweets"]:
             r = requests.post("http://127.0.0.1:8086/api/v1/sentiment", data = {'text' : tweet["text"],'id' : tweet["id"]})
             sentiments[json.loads(r.text)["sentiment"]] +=1
-        url_tweets_db = urllib.urlopen("http://127.0.0.1:8085/api/v1/remove_tweets_db")
+        # url_tweets_db = urllib.urlopen("http://127.0.0.1:8085/api/v1/remove_tweets_db")
 
         
         url_omdb = urllib.urlopen("http://127.0.0.1:8084/api/v1/information?t=" + title)

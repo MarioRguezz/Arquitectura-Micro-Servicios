@@ -35,7 +35,7 @@ import json
 import pymongo
 from pymongo import MongoClient
 import sys
-sys.path.insert(0, '../Database')
+sys.path.insert(0, 'Database')
 import conexion
 
 app = Flask(__name__)

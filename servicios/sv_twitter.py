@@ -33,7 +33,7 @@ import twitter
 import requests
 import json
 import sys
-sys.path.insert(0, '../Database')
+sys.path.insert(0, 'Database')
 import conexion
 
 app = Flask(__name__)
@@ -53,7 +53,7 @@ def tweets():
                       access_token_key='174333272-muKrJ9mlEfRwUwzoK5BKz1IrwwrqyIrnVj8LqZbO',
                       access_token_secret='wPvxXEuBkI7KVJyLdJMvh0woD87gaElNuwDde7qlOslFo')
     conexion.isSqliteExist()
-    search = api.GetSearch(title, count=50)
+    search = api.GetSearch(title, count=100)
     tweets = []
     for tweet in search:
         tweets.append({"id":tweet.id,"text":tweet.text})
