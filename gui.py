@@ -26,6 +26,9 @@ import os
 from flask import Flask, render_template, request
 import urllib, json
 import requests
+import sys
+sys.path.insert(0, 'Database')
+import conexion
 
 app = Flask(__name__)
 
@@ -68,7 +71,14 @@ def sentiment_analysis():
 
 @app.route("/historial", methods=['GET'])
 def historial():
-        return render_template("historial.html")
+
+        # json_omdb =  conexion.selectTweets()
+        #for tweet in conexion.selectTweets():
+        #  json_result = {"tweets":tweets}
+        json_result = {"tweets": conexion.selectTweet()}
+    
+
+        return render_template("historial.html", result=json_result)
 
 
 if __name__ == '__main__':

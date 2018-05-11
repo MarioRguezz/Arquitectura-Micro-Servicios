@@ -32,8 +32,6 @@ import urllib, json
 import twitter
 import requests
 import json
-import pymongo
-from pymongo import MongoClient
 import sys
 sys.path.insert(0, '../Database')
 import conexion
