@@ -66,12 +66,13 @@ def selectTweets():
     cursor.execute('''SELECT * FROM Twitter ''')
     db.commit()
     db.close()
+    DROP TABLE Twitter
 """
 
 def deleteTweets():
     db = sqlite3.connect('DBArch')
     cursor = db.cursor()
-    cursor.execute('''DROP TABLE Twitter''')
+    cursor.execute('''DELETE from Twitter''')
     db.commit()    
     db.close() 
 
@@ -82,11 +83,3 @@ def selectTweets():
     all_rows = cursor.fetchall()
     db.close()
     return all_rows
-
-def selectTweet():
-    db = sqlite3.connect('DBArch')
-    cursor = db.cursor()
-    cursor.execute('''SELECT * FROM Twitter ''')
-    user1 = cursor.fetchone() #retrieve the first row
-    db.close()
-    return user1[0]

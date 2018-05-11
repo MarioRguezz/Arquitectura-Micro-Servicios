@@ -8,8 +8,8 @@
 # Descripción:
 #
 #   Este archivo define el rol de un servicio. Su función general es porporcionar en un objeto JSON
-#   información detallada acerca de una pelicula o una serie en particular haciendo uso del API proporcionada
-#   por IMDb ('https://www.imdb.com/').
+#   evauación de los tweets guardados para saber si son positivos, negativos o neutros mediante la  API proporcionada
+#   por análisis de sentimientos  ('http://text-processing.com').
 #
 #
 #
@@ -18,10 +18,10 @@
 #           |  Nombre del elemento  |     Responsabilidad     |      Propiedades       |
 #           +-----------------------+-------------------------+------------------------+
 #           |                       |  - Ofrecer un JSON que  | - Utiliza el API de    |
-#           |    Procesador de      |    contenga información |   IMDb.                |
-#           |     comentarios       |    detallada de pelí-   | - Devuelve un JSON con |
-#           |       de IMDb         |    culas o series en    |   datos de la serie o  |
-#           |                       |    particular.          |   pelicula en cuestión.|
+#           |    Procesador         |    contenga información |   text-processing.     |
+#           |    sentimientos       |    de la evaluación de  | - Devuelve un JSON con |
+#           |                       |análisis de sentimiento  |   tweets evaluados con |
+#           |                       |de tweets guardados      |análisis de sentimiento.|
 #           +-----------------------+-------------------------+------------------------+
 #
 #	Ejemplo de uso: Abrir navegador e ingresar a http://localhost:8084/api/v1/information?t=matrix
