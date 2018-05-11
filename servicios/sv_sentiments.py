@@ -1,31 +1,31 @@
 # -*- coding: utf-8 -*-
 # !/usr/bin/env python
 # ----------------------------------------------------------------------------------------------------------------
-# Archivo: sv_information.py
+# Archivo: sv_sentiments.py
 # Tarea: 2 Arquitecturas Micro Servicios.
-# Autor(es): Perla Velasco & Yonathan Mtz.
-# Version: 1.3 Octubre 2017
+# Autor(es): Equipo Alfeluma
+# Version: 1.1 Mayo 2018
 # Descripción:
 #
-#   Este archivo define el rol de un servicio. Su función general es porporcionar en un objeto JSON
-#   información detallada acerca de una pelicula o una serie en particular haciendo uso del API proporcionada
-#   por IMDb ('https://www.imdb.com/').
+#   Este archivo define el rol de un servicio. Su función general es porporcionar en un objeto JSON con
+#   información acerca de la evaluación de una cadena mostrando el análisis de sentimiento negativo, positivo
+#   p neutro a través de la  API proporcionada por IMDb ('text-processing.com/').
 #
 #
 #
-#                                        sv_information.py
+#                                        sv_sentiments.py
 #           +-----------------------+-------------------------+------------------------+
 #           |  Nombre del elemento  |     Responsabilidad     |      Propiedades       |
 #           +-----------------------+-------------------------+------------------------+
 #           |                       |  - Ofrecer un JSON que  | - Utiliza el API de    |
-#           |    Procesador de      |    contenga información |   IMDb.                |
-#           |     comentarios       |    detallada de pelí-   | - Devuelve un JSON con |
-#           |       de IMDb         |    culas o series en    |   datos de la serie o  |
-#           |                       |    particular.          |   pelicula en cuestión.|
+#           |    Procesador         |    contenga información |   text-processing.     |
+#           |     Sentimientos      |    del análisis de      | - Devuelve un JSON con |
+#           |                       |    sentimientos de un   |   tweets evaluados por |
+#           |                       |   comentario particular.|   sentimientos.        |
 #           +-----------------------+-------------------------+------------------------+
 #
-#	Ejemplo de uso: Abrir navegador e ingresar a http://localhost:8084/api/v1/information?t=matrix
-#
+#	Ejemplo de uso: Abrir navegador e ingresar a http://localhost:8086/api/v1/sentiment
+#   para evaluar un tweet.
 import os
 from flask import Flask, abort, render_template, request
 import urllib, json

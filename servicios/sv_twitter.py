@@ -1,30 +1,31 @@
 # -*- coding: utf-8 -*-
 # !/usr/bin/env python
 # ----------------------------------------------------------------------------------------------------------------
-# Archivo: sv_sentiment.py
+# Archivo: sv_twitter.py
 # Tarea: 2 Arquitecturas Micro Servicios.
 # Autor(es): Equipo Alfeluma
 # Version: 1.1 Mayo 2018
 # Descripción:
 #
-#   Este archivo define el rol de un servicio. Su función general es porporcionar en un objeto JSON
+#   Este archivo define el rol de un servicio. Su función general es porporcionar en un objeto JSON de los tweets, así como borrarlos
+#   y consultarlos mediante la API proporcionada por 
 #   evauación de los tweets guardados para saber si son positivos, negativos o neutros mediante la  API proporcionada
-#   por análisis de sentimientos  ('http://text-processing.com').
+#   ('https://developer.twitter.com/').
 #
 #
 #
-#                                        sv_information.py
+#                                        sv_twitter.py
 #           +-----------------------+-------------------------+------------------------+
 #           |  Nombre del elemento  |     Responsabilidad     |      Propiedades       |
 #           +-----------------------+-------------------------+------------------------+
 #           |                       |  - Ofrecer un JSON que  | - Utiliza el API de    |
-#           |    Procesador         |    contenga información |   text-processing.     |
-#           |    sentimientos       |    de la evaluación de  | - Devuelve un JSON con |
-#           |                       |análisis de sentimiento  |   tweets evaluados con |
-#           |                       |de tweets guardados      |análisis de sentimiento.|
+#           |    Procesador         |    contenga tweets      |   twitter.     |
+#           |    twitter            |  - Guardar los tweets   | - Devuelve un JSON con |
+#           |                       |  - Borrar los tweets de |  tweets o guarda tweets|
+#           |                       |    base de datos        | o borra tweets de la bd|
 #           +-----------------------+-------------------------+------------------------+
 #
-#	Ejemplo de uso: Abrir navegador e ingresar a http://localhost:8084/api/v1/information?t=matrix
+#	Ejemplo de uso: Abrir navegador e ingresar a http://localhost:8085/api/v1/tweets?text=tweet  para adquirir los tweets
 #
 import os
 from flask import Flask, abort, render_template, request
@@ -53,7 +54,7 @@ def tweets():
                       access_token_key='174333272-muKrJ9mlEfRwUwzoK5BKz1IrwwrqyIrnVj8LqZbO',
                       access_token_secret='wPvxXEuBkI7KVJyLdJMvh0woD87gaElNuwDde7qlOslFo')
     conexion.isSqliteExist()
-    search = api.GetSearch(title, count=100)
+    search = api.GetSearch(title, count=50)
     tweets = []
     for tweet in search:
         tweets.append({"id":tweet.id,"text":tweet.text})
@@ -72,7 +73,6 @@ def tweets_db():
     tweets = []
     for tweet in tweets_db:
         tweets.append({"id":tweet[0],"text":tweet[1],"date":tweet[2],"feeling":tweet[3]})
-    print tweets
     return json.dumps({"tweets":tweets})
 
 

@@ -9,7 +9,7 @@ La especificación es la siguiente:
 ## Procesador de Comentarios de IMDb
   
 FORMAT: 1A
-HOST: http://localhost:8085
+HOST: http://localhost:8084
 
 ## Information Service [/api/v1/information{?t}]
 
@@ -53,21 +53,21 @@ HOST: http://localhost:8085
 
 Ejemplo de uso: 
 1. Abrir el navegador
-1. Ingresar a https://uaz.cloud.tyk.io/content/api/v1/information?t=Stranger+Things
+2. Ingresar a https://uaz.cloud.tyk.io/content/api/v1/information?t=Stranger+Things
 
 
 
 ## Procesador Sentimientos
   
 FORMAT: 1A  
-HOST: http://localhost:8085
+HOST: http://localhost:8086
 
-## Análisis de sentimientos [/api/v1/SentimentAnalysis{?t}]
+## Análisis de sentimientos [/api/v1/sentiment]
 
 + Parameters
-    + t - Corresponde al comentario de twitter a procesar
+    + t - Corresponde al comentario de twitter a procesar 
 
-### Análisis de sentimientos [GET]
+### Análisis de sentimientos [POST]
 
 + Response 200 (application/json)
 
@@ -86,15 +86,15 @@ HOST: http://localhost:8085
 
 Ejemplo de uso: 
 1. Abrir el navegador
-1. Ingresar a http://localhost:8086/api/v1/SentimentAnalysis/get
+2. Ingresar a http://localhost:8086/api/v1/sentiment?text=dont+like+simpsons
 
 
 ## Procesador Twitter
 
 FORMAT: 1A
-HOST: http://localhost:8086
+HOST: http://localhost:8085
 
-## Twitter comentario [/api/v1/SentimentAnalysis/get]
+## Twitter comentario [/api/v1/tweets/get{?t}]
 
 + Parameters
     + t - Corresponde a la cadena de texto para buscar tweets relacionados
@@ -105,7 +105,7 @@ HOST: http://localhost:8086
 
         {
             "id" : "Some text",
-            "tweets" : "Some text",
+            "text" : "Some text",
         }
 
 + Response 400 (text)
@@ -117,9 +117,9 @@ HOST: http://localhost:8086
 
 Ejemplo de uso:
 1. Abrir el navegador
-1. Ingresar a http://localhost:8086/api/v1/tweets/set?t=Stranger+Things
+2. Ingresar a http://localhost:8085//api/v1/tweets?t=Stranger+Things
 
-## Twitter historial [/api/v1/SentimentAnalysis/get]
+## Twitter historial [/api/v1/api/v1/tweets_db]
 
 ### Get twitter comment [GET]
 
@@ -141,10 +141,10 @@ Ejemplo de uso:
 
 Ejemplo de uso:
 1. Abrir el navegador
-1. Ingresar a http://localhost:8086/api/v1/tweets/set?t=Stranger+Things
+2. Ingresar a http://localhost:8085/api/v1/api/v1/tweets_db
 
 
-## Borrar tweets [/api/v1/SentimentAnalysis/get]
+## Borrar tweets [/api/v1/remove_tweets_db]
 
 ### Delete tweets saved [POST]
 
@@ -163,7 +163,7 @@ Ejemplo de uso:
 
 Ejemplo de uso:
 1. Abrir el navegador
-1. Ingresar a http://localhost:8086/api/v1/tweets/set?t=Stranger+Things
+2. Ingresar a http://localhost:8085//api/v1/remove_tweets_db
 
 
 

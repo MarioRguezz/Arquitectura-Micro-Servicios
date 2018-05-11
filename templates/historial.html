@@ -47,11 +47,11 @@
                   </tr>
                 </thead>
                 <tbody>
-                        {%for  your_list_element in your_list   %}
+                        {%for  twitter_element in result['tweets']   %}
                         <tr>
-                        <td scope="col">{{ your_list_element[1]}} </td>
-                        <td scope="col">{{ your_list_element[2]}} </td>
-                        <td scope="col">{{ your_list_element[3]}} </td>
+                        <td scope="col">{{ twitter_element['text']}} </td>
+                        <td scope="col">{{ twitter_element['date']}} </td>
+                        <td scope="col">{{ twitter_element['feeling']}} </td>
                         </tr>
                       {% endfor %}
                 </tbody>

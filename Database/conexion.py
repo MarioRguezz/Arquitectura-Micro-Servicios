@@ -82,7 +82,6 @@ def selectTweets():
     cursor = db.cursor()
     cursor.execute('''SELECT * FROM Twitter ''')
     all_rows = cursor.fetchall()
-    
     db.close()
     return all_rows
 

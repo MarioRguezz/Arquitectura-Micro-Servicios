@@ -3,12 +3,12 @@
 # ----------------------------------------------------------------------------------------------------------------
 # Archivo: gui.py
 # Tarea: 2 Arquitecturas Micro Servicios.
-# Autor(es): Perla Velasco & Yonathan Mtz.
-# Version: 1.2 Abril 2017
+# Autor(es): Equipo Alfeluma
+# Version: 1.1 Mayo 2018
 # Descripción:
 #
-#   Este archivo define la interfaz gráfica del usuario. Recibe dos parámetros que posteriormente son enviados
-#   a servicios que la interfaz utiliza.
+#   Este archivo define la interfaz gráfica del usuario. Recibe varios parámetros que posteriormente son enviados
+#   a servicios que cada interfaz utiliza.
 #   
 #   
 #
@@ -26,10 +26,6 @@ import os
 from flask import Flask, render_template, request
 import urllib, json
 import requests
-import sys
-sys.path.insert(0, 'Database')
-import conexion
-
 app = Flask(__name__)
 
 
@@ -76,14 +72,17 @@ def sentiment_analysis():
 
 @app.route("/historial", methods=['GET'])
 def historial():
-        your_list = conexion.selectTweets() # servicio select
-        return render_template("historial.html", your_list=your_list)
+        url_tweets = urllib.urlopen("http://127.0.0.1:8085/api/v1/tweets_db")
+        json_tweets = url_tweets.read()
+        twitter_result = json.loads(json_tweets)
+        return render_template("historial.html", result=twitter_result)
 
 @app.route("/delete", methods=['GET'])
 def remove():
-        conexion.deleteTweets() #Servicio delete 
-        your_list = conexion.selectTweets() 
-        return render_template("historial.html", your_list=your_list)
+        url_tweets = urllib.urlopen("http://127.0.0.1:8085/api/v1/remove_tweets_db")
+        json_tweets = url_tweets.read()
+        twitter_result = json.loads(json_tweets)
+        return render_template("historial.html", result=twitter_result)
 
 
 if __name__ == '__main__':
