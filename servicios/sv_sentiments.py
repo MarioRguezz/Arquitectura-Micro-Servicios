@@ -50,16 +50,12 @@ def sentiment():
     """
     # Se lee el parámetro 't' que contiene el título de la película o serie que se va a consultar
     id_tweet = request.form["id"]
-    print id_tweet
     sentiment_db = conexion.selectSentiment(id_tweet)
-    print sentiment_db
     if sentiment_db == None:
         tweet = request.form["text"]
         r = requests.post("http://text-processing.com/api/sentiment/", data = {'text' : tweet})
         response = json.loads(r.text)
         conexion.updateTweet(id_tweet,response["label"])
-        sentiment_db = conexion.selectSentiment(id_tweet)
-        print sentiment_db
         sentiment = {"sentiment":response["label"]}
     else:
         sentiment = {"sentiment": sentiment_db}

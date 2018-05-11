@@ -46,15 +46,13 @@ def sentiment_analysis():
     if len(title) is not 0:
         # La siguiente url es para un servicio local
         url_tweets = urllib.urlopen("http://127.0.0.1:8085/api/v1/tweets?t=" + title)
-
         json_tweets = url_tweets.read()
         tweets = json.loads(json_tweets)
         sentiments = {"pos":0,"neg":0,"neutral":0}
         for tweet in tweets["tweets"]:
             r = requests.post("http://127.0.0.1:8086/api/v1/sentiment", data = {'text' : tweet["text"],'id' : tweet["id"]})
-            print r.text
             sentiments[json.loads(r.text)["sentiment"]] +=1
-        
+        url_tweets_db = urllib.urlopen("http://127.0.0.1:8085/api/v1/remove_tweets_db")
 
         
         url_omdb = urllib.urlopen("http://127.0.0.1:8084/api/v1/information?t=" + title)

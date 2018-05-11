@@ -59,21 +59,38 @@ def tweets():
         tweets.append({"id":tweet.id,"text":tweet.text})
         conexion.storeTweet(tweet.id,tweet.text)
     return json.dumps({"tweets":tweets})
-    
-    # for tweet in conexion.selectTweets():
-    #     print tweet
-    
-    # sentiments = {}
 
-    
-    # for tweet in search:
-    #     r = requests.post("http://text-processing.com/api/sentiment/", data = {'text' : tweet.text})
-    #     response = json.loads(r.text)
-    #     if not response["label"] in sentiments:
-    #         sentiments[response["label"]] = 1
-    #     else:
-    #         sentiments[response["label"]] += 1
-    # return json.dumps(sentiments), 200
+@app.route("/api/v1/tweets_db")
+def tweets_db():
+    """
+    Este método obtiene información acerca de una película o serie
+    específica.
+    :return: JSON con la información de la película o serie
+    """
+    # Se lee el parámetro 't' que contiene el título de la película o serie que se va a consultar
+    tweets_db = conexion.selectTweets()
+    tweets = []
+    for tweet in tweets_db:
+        tweets.append({"id":tweet[0],"text":tweet[1],"date":tweet[2],"feeling":tweet[3]})
+    print tweets
+    return json.dumps({"tweets":tweets})
+
+
+@app.route("/api/v1/remove_tweets_db")
+def remove_tweets_db():
+    """
+    Este método obtiene información acerca de una película o serie
+    específica.
+    :return: JSON con la información de la película o serie
+    """
+    # Se lee el parámetro 't' que contiene el título de la película o serie que se va a consultar
+    conexion.deleteTweets()
+    tweets_db = conexion.selectTweets()
+    tweets = []
+    for tweet in tweets_db:
+        tweets.append({"id":tweet[0],"text":tweet[1],"date":tweet[2],"feeling":tweet[3]})
+    print tweets
+    return json.dumps({"tweets":tweets})
 
 
 if __name__ == '__main__':
