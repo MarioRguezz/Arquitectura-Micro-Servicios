@@ -76,14 +76,14 @@ def sentiment_analysis():
 
 @app.route("/historial", methods=['GET'])
 def historial():
+        your_list = conexion.selectTweets() # servicio select
+        return render_template("historial.html", your_list=your_list)
 
-        # json_omdb =  conexion.selectTweets()
-        #for tweet in conexion.selectTweets():
-        #  json_result = {"tweets":tweets}
-        json_result = {"tweets": conexion.selectTweet()}
-    
-
-        return render_template("historial.html", result=json_result)
+@app.route("/delete", methods=['GET'])
+def remove():
+        conexion.deleteTweets() #Servicio delete 
+        your_list = conexion.selectTweets() 
+        return render_template("historial.html", your_list=your_list)
 
 
 if __name__ == '__main__':
