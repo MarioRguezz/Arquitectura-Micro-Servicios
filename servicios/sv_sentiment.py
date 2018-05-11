@@ -58,22 +58,22 @@ def tweets():
     for tweet in search:
         tweets.append({"id":tweet.id,"text":tweet.text})
         conexion.storeTweet(tweet.id,tweet.text)
-    print json.dumps({"tweets":tweets})
+    return json.dumps({"tweets":tweets})
     
-    for tweet in conexion.selectTweets():
-        print tweet
+    # for tweet in conexion.selectTweets():
+    #     print tweet
     
-    sentiments = {}
+    # sentiments = {}
 
     
-    for tweet in search:
-        r = requests.post("http://text-processing.com/api/sentiment/", data = {'text' : tweet.text})
-        response = json.loads(r.text)
-        if not response["label"] in sentiments:
-            sentiments[response["label"]] = 1
-        else:
-            sentiments[response["label"]] += 1
-    return json.dumps(sentiments), 200
+    # for tweet in search:
+    #     r = requests.post("http://text-processing.com/api/sentiment/", data = {'text' : tweet.text})
+    #     response = json.loads(r.text)
+    #     if not response["label"] in sentiments:
+    #         sentiments[response["label"]] = 1
+    #     else:
+    #         sentiments[response["label"]] += 1
+    # return json.dumps(sentiments), 200
 
 
 if __name__ == '__main__':

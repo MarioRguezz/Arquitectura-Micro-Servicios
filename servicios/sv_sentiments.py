@@ -41,7 +41,7 @@ import conexion
 app = Flask(__name__)
 
 
-@app.route("/api/v1/sentiment")
+@app.route("/api/v1/sentiment",methods=["POST"])
 def sentiment():
     """
     Este método obtiene información acerca de una película o serie
@@ -49,10 +49,20 @@ def sentiment():
     :return: JSON con la información de la película o serie
     """
     # Se lee el parámetro 't' que contiene el título de la película o serie que se va a consultar
-    tweet = request.args.get("tweet")
-    r = requests.post("http://text-processing.com/api/sentiment/", data = {'text' : tweet.text})
-    response = json.loads(r.text)
-    sentiment = {"sentiment":response["label"]}
+    id_tweet = request.form["id"]
+    print id_tweet
+    sentiment_db = conexion.selectSentiment(id_tweet)
+    print sentiment_db
+    if sentiment_db == None:
+        tweet = request.form["text"]
+        r = requests.post("http://text-processing.com/api/sentiment/", data = {'text' : tweet})
+        response = json.loads(r.text)
+        conexion.updateTweet(id_tweet,response["label"])
+        sentiment_db = conexion.selectSentiment(id_tweet)
+        print sentiment_db
+        sentiment = {"sentiment":response["label"]}
+    else:
+        sentiment = {"sentiment": sentiment_db}
     return json.dumps(sentiment), 200
 
 

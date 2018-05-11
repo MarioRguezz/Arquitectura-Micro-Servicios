@@ -45,11 +45,18 @@ def sentiment_analysis():
     title = request.args.get("t")
     if len(title) is not 0:
         # La siguiente url es para un servicio local
-        url_sentiment = urllib.urlopen("http://127.0.0.1:8085/api/v1/tweets?t=" + title)
-        json_sentiment = url_sentiment.read()
+        url_tweets = urllib.urlopen("http://127.0.0.1:8085/api/v1/tweets?t=" + title)
 
-        sentiments = json.loads(json_sentiment)
+        json_tweets = url_tweets.read()
+        tweets = json.loads(json_tweets)
+        sentiments = {"pos":0,"neg":0,"neutral":0}
+        for tweet in tweets["tweets"]:
+            r = requests.post("http://127.0.0.1:8086/api/v1/sentiment", data = {'text' : tweet["text"],'id' : tweet["id"]})
+            print r.text
+            sentiments[json.loads(r.text)["sentiment"]] +=1
+        
 
+        
         url_omdb = urllib.urlopen("http://127.0.0.1:8084/api/v1/information?t=" + title)
         # La siguiente url es para un servicio en la nube, pregunta al instructor(a) si el servicio está activo
         # url_omdb = urllib.urlopen("https://uaz.cloud.tyk.io/content/api/v1/information?t=" + title)

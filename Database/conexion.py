@@ -55,7 +55,7 @@ def storeTweet(Id,Tweet):
 def updateTweet(Id,Feeling):
     db = sqlite3.connect('DBArch')
     cursor = db.cursor()
-    cursor.execute('''UPDATE Twitter SET feeling = ? WHERE id = ? ''', (Id, Feeling))
+    cursor.execute('''UPDATE Twitter SET feeling = ? WHERE id = ? ''', (Feeling, Id))
     db.commit()
     db.close()
 
@@ -90,3 +90,10 @@ def selectTweet():
     user1 = cursor.fetchone() #retrieve the first row
     db.close()
     return user1[0]
+
+def selectSentiment(Id):
+    db = sqlite3.connect('DBArch')
+    cursor = db.cursor()
+    cursor.execute('''SELECT feeling FROM Twitter where id=''' + Id)
+    list = cursor.fetchall()
+    return list[0][0]
